@@ -1,0 +1,13 @@
+<div>
+  <p><a href='<%=@post.url%>'><%=@post.title%></a>, <%= @post.short_url %></p>
+  <p><a href='/user/<%=@post.user.id%>'><%=@post.user.name%></a>, <a href="/post/<%= @post.id %>"><%=@post.comments.count%> comments</a></p>
+  <form action='/post/<%=@post.id%>/comment' method='POST'> 
+    <textarea name='comment[content]' rows='10' cols='40' placeholder='Your Comment'></textarea>
+    <input type="submit" value='add comment'  >   
+  </form>
+</div>
+<div class='comments'>
+  <% @post.comments.where('parent_id IS NULL').each do |comment| %>
+    <%= erb :_comment, layout: false, locals: {comment: comment} %>
+  <% end %>
+</div>

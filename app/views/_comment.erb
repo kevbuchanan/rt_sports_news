@@ -1,0 +1,10 @@
+<div class='comment'>
+  <h4><a class='user-name' href="/user/<%= comment.user.id%>"><%= comment.user.name %></a></h4>
+  <p><%=comment.content%><p>
+  <a class='reply' href='/reply/<%=comment.id%>'>Reply</a>
+  <% comment.replies.each do |reply| %>
+    <%= erb :_comment, layout: false, locals: {comment: reply} %>
+  <% end %>
+</div>
+
+

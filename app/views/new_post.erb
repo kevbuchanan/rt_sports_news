@@ -1,0 +1,11 @@
+<% if @post && @post.errors %>
+  <% @post.errors.full_messages.each do |error| %>
+    <p><%=error%></p>
+  <% end %>
+<% end %>
+
+<form action='/post/new' method='post'>
+  <input type="text" placeholder='Title' name='post[title]'>
+  <input type="text" placeholder='URL' name='post[url]'>
+  <input type="submit" value='Submit'>
+</form>

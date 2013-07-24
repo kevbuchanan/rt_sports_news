@@ -1,0 +1,8 @@
+<div>
+  <h4>Reply to <%=@comment.user%>'s comment:</h4>
+  <p><%=@comment.content%></p>
+  <form action='/reply/<%=@comment.id%>' method='POST'> 
+    <textarea name='comment[content]' rows='10' cols='40' placeholder='Your Comment'></textarea>
+    <input type="submit" value='add comment'  >   
+  </form>
+</div>

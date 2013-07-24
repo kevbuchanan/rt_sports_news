@@ -18,6 +18,25 @@
   <title></title>
 </head>
 <body>
-  <%= yield %>
+  <div class='container'>
+    <header>
+      <h1>Wacker News</h1>
+      <h2>More Wack Than Hacker News</h2>
+      <nav>
+        <ul>
+          <li><a href='/'>Posts</a></li>
+          <% if !logged_in? %>
+          <li><a href='/login'>Log In</a></li>
+          <li><a href='/login'>Sign Up</a></li>
+          <% else %>
+          <li><form action='/logout' method='post'><input type='submit' value='Logout'></form></li>
+          <% end %>
+        </ul>
+      </nav>
+    </header>
+    <div class='content'>
+      <%= yield %>
+    </div>
+  </div>
 </body>
 </html>
