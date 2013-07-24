@@ -7,12 +7,10 @@ get '/post/new' do
 end
 
 get '/post/edit/:id' do
-
+  @post = Post.find(params[:id])
+  erb :edit_post
 end
 
-get 'post/:id/comment' do
-
-end
 
 get "/post/:id" do 
   @post = Post.find(params[:id])
@@ -35,11 +33,23 @@ post '/post/new' do
 end
 
 post '/post/edit/:id' do
-
+  @post = Post.find(params[:id])
+  if logged_in? && @post.user.id == current_user.id 
+    @post.update_attributes(params[:post])
+    redirect to("/post/#{@post.id}")
+  else
+    redirect to('/login')
+  end 
 end
 
 post '/post/delete/:id' do
-
+   @post = Post.find(params[:id])
+   if logged_in? && @post.user.id == current_user.id 
+     @post.destroy
+     redirect to('/')
+   else
+     redirect to('/login')
+   end 
 end
 
 post '/post/:id/comment' do

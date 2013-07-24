@@ -1,4 +1,13 @@
 <div>
+  <% if logged_in? && @post.user.id == current_user.id %> 
+    <form action="/post/delete/<%= @post.id%>" method='POST'>
+      <input type='submit' value='Delete Post'> 
+    </form>
+    <form action="/post/edit/<%= @post.id%>" method='GET'>
+      <input type='submit' value='Edit Post'> 
+    </form>
+  <% end %> 
+
   <p><a href='<%=@post.url%>'><%=@post.title%></a>, <%= @post.short_url %></p>
   <p><a href='/user/<%=@post.user.id%>'><%=@post.user.name%></a>, <a href="/post/<%= @post.id %>"><%=@post.comments.count%> comments</a></p>
   <form action='/post/<%=@post.id%>/comment' method='POST'> 

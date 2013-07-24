@@ -1,0 +1,11 @@
+<% if @post && @post.errors %>
+  <% @post.errors.full_messages.each do |error| %>
+    <p><%=error%></p>
+  <% end %>
+<% end %>
+
+<form action='/post/edit/<%=@post.id%>' method='post'>
+  <input type="text" value='<%=@post.title%>' name='post[title]'>
+  <input type="text" value='<%=@post.url%>' name='post[url]'>
+  <input type="submit" value='Submit'>
+</form>
