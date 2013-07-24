@@ -7,6 +7,8 @@
     See: http://necolas.github.com/normalize.css/
   -->
   <link rel="stylesheet" href="/css/normalize.css">
+  <link href='http://fonts.googleapis.com/css?family=Racing+Sans+One' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Armata' rel='stylesheet' type='text/css'>
   <!--
     application.css is where you put your styles
   -->
@@ -20,18 +22,20 @@
 <body>
   <div class='container'>
     <header>
-      <h1>Wacker News</h1>
-      <h2>More Wack Than Hacker News</h2>
+      <div id='login'>
+        <% if !logged_in? %>
+        <form action='/login' method='get'><input type='submit' value='Login'></form>
+        <form action='/login' method='get'><input type='submit' value='Sign Up'></form>
+        <% else %>
+        <form action='/logout' method='post'><input type='submit' value='Logout'></form>
+        <% end %>
+      </div>
+      <h1>Real Talk Sports News</h1>
+      <h2>ESPN who?</h2>
       <nav>
         <ul>
           <li><a href='/'>Posts</a></li>
           <li><a href='/post/new'>Create Post</a></li>
-          <% if !logged_in? %>
-          <li><a href='/login'>Log In</a></li>
-          <li><a href='/login'>Sign Up</a></li>
-          <% else %>
-          <li><form action='/logout' method='post'><input type='submit' value='Logout'></form></li>
-          <% end %>
         </ul>
       </nav>
     </header>

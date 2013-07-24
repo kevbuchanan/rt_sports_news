@@ -23,8 +23,7 @@ get '/reply/:comment_id' do
 end
 
 post '/post/new' do
-  params[:post][:user_id] = current_user.id
-  @post = Post.create(params[:post])
+  @post = current_user.posts.create(params[:post])
   if @post.valid?
     redirect to("/post/#{@post.id}")
   else
@@ -54,9 +53,11 @@ end
 
 post '/post/:id/comment' do
   if logged_in?
-    params[:comment][:user_id] = current_user.id
-    params[:comment][:post_id] = params[:id]
-    @comment = Comment.create(params[:comment])
+
+    @comment = current_user.comments.build(params[:comment])
+    @comment.post = Post.find(params[:id])
+    @comment.save
+    
     redirect to("/post/#{params[:id]}")
   else
     redirect to('/login')
@@ -75,5 +76,40 @@ post '/reply/:comment_id' do
     redirect to('/login')
   end
 end
+
+post '/post/upvote/:id' do
+  if logged_in?
+    @post = Post.find_by_id(params[:id])
+    @post.votes.create(user_id: current_user.id)
+  end
+  redirect to("/post/#{@post.id}")
+end
+
+post '/comment/upvote/:id' do
+  if logged_in?
+    @comment = Comment.find_by_id(params[:id])
+    @comment.votes.create(user_id: current_user.id)
+  end
+  redirect to("/post/#{@comment.post.id}")
+end 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

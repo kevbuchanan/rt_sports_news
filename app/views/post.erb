@@ -10,6 +10,8 @@
 
   <p><a href='<%=@post.url%>'><%=@post.title%></a>, <%= @post.short_url %></p>
   <p><a href='/user/<%=@post.user.id%>'><%=@post.user.name%></a>, <a href="/post/<%= @post.id %>"><%=@post.comments.count%> comments</a></p>
+  <span><%= @post.votes.count %> points</span>
+  <form action='/post/upvote/<%=@post.id%>' method='post'><input type='submit' value='Upvote'></form>
   <form action='/post/<%=@post.id%>/comment' method='POST'> 
     <textarea name='comment[content]' rows='10' cols='40' placeholder='Your Comment'></textarea>
     <input type="submit" value='add comment'  >   
