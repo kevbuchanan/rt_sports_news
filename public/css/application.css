@@ -4,7 +4,7 @@ body {
 
 .container {
   margin: 20px auto;
-  width: 1000px;
+  width: 1200px;
   border-radius: 5px;
   font-family: 'Armata', sans-serif;
   background-color: black;
@@ -64,7 +64,7 @@ nav li a {
 }
 
 .content {
-  width: 940px;
+  width: 1140px;
   padding: 10px;
   background-color: #ecf0f1;
   margin: 20px auto;
@@ -90,7 +90,7 @@ nav li a {
 }
 
 .comment {
-  margin-left: 20px;
+  margin-left: 40px;
 }
 
 .reply {

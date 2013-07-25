@@ -80,7 +80,8 @@ end
 post '/post/upvote/:id' do
   if logged_in?
     @post = Post.find_by_id(params[:id])
-    @post.votes.create(user_id: current_user.id)
+    vote = @post.votes.create(user_id: current_user.id)
+    return '1' if vote.valid? && request.xhr?
   end
   redirect to("/post/#{@post.id}")
 end
@@ -88,7 +89,8 @@ end
 post '/comment/upvote/:id' do
   if logged_in?
     @comment = Comment.find_by_id(params[:id])
-    @comment.votes.create(user_id: current_user.id)
+    vote = @comment.votes.create(user_id: current_user.id)
+    return '1' if vote.valid? && request.xhr?
   end
   redirect to("/post/#{@comment.post.id}")
 end 
